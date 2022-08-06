@@ -18,4 +18,14 @@ export const DEFAULT_VALUES_CITY: CityGoogle = {
   timeMillisecond: 0,
   timeZone: '',
   address_components: [DEFAULT_VALUES_ADDRESS],
+  weather: {
+    temp: '',
+    wind: 0,
+    humidity: 0,
+    pressure: 0,
+    feels: '',
+    icon: '',
+    InHeaven: '',
+    cold: false,
+  },
 };

@@ -7,6 +7,7 @@ import {
 } from '@mui/icons-material';
 
 import { fetchInfoCityWeather } from 'reducers/fetchWeather';
+import { deleteCity } from 'reducers/fetchGoogle';
 import { CityGoogle } from 'interface';
 
 import useStyles from './Card.styles';
@@ -22,11 +23,11 @@ const Card = ({ city }: ICardPropsType) => {
   const classes = useStyles();
 
   const clickDeleteCity = () => {
-    console.log('clickDeleteCity');
+    dispatch(deleteCity(city));
   };
 
   const clickUpdateCity = () => {
-    console.log('clickUpdateCity');
+    dispatch(fetchInfoCityWeather(city));
   };
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const Card = ({ city }: ICardPropsType) => {
           </Typography>
           <Typography
             className={classes.cardCityData}
-          >{`${timeZone} за містом`}</Typography>
+          >{`Дата а містом: ${timeZone}`}</Typography>
         </Box>
         <Box className={classes.cardTempInfo}>
           <Box

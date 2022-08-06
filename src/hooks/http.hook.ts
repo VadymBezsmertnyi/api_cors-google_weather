@@ -1,7 +1,6 @@
 export const useHttp = () => {
   const request = async (
     url: string,
-    mode = 'no-cors',
     method = 'GET',
     body = null,
     headers = {
@@ -10,7 +9,7 @@ export const useHttp = () => {
     }
   ) => {
     try {
-      const response = await fetch(url, { mode, method, body, headers });
+      const response = await fetch(url, { method, body, headers });
 
       if (!response.ok) {
         throw new Error(`Could not fetch ${url}, status: ${response.status}`);

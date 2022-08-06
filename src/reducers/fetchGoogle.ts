@@ -14,7 +14,8 @@ export const fetchInfoCityGoogle = createAsyncThunk(
   ({ place_id }: CityGoogle) => {
     const { request } = useHttp();
     return request(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${KEY_GOOGLE}`
+      `http://localhost:8080/google/addCity?place_id=${place_id}&key=${KEY_GOOGLE}`,
+      'GET'
     );
   }
 );
@@ -23,10 +24,12 @@ const enterCity = createSlice({
   name: 'cities',
   initialState,
   reducers: {
-    /* addCity: (state, action) => {
-      console.log(state, action);
-      state.cities = verifyCities(state.cities, action.payload);
-    }, */
+    deleteCity: (state, action) => {
+      const { payload } = action;
+      state.cities = state.cities.filter(
+        ({ place_id }) => place_id !== payload.place_id
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,4 +53,4 @@ const { actions, reducer } = enterCity;
 
 export default reducer;
 
-//export const { addCity } = actions;
+export const { deleteCity } = actions;

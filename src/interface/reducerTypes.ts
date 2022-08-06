@@ -24,6 +24,16 @@ export interface CityGoogle {
   timeMillisecond: number | Date;
   timeZone: string;
   address_components: AddressComponentsType[];
+  weather: {
+    temp: number | string;
+    wind: number;
+    humidity: number;
+    pressure: number;
+    feels: number | string;
+    icon: string;
+    InHeaven: string;
+    cold: Boolean;
+  };
 }
 
 export type StateReducerType = {
