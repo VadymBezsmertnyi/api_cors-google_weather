@@ -8,6 +8,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { create } from 'jss';
 import jssIncreaseSpecificity from 'jss-increase-specificity';
 
+import { HeaderComponent } from 'components';
+import { Cards, FullInfo } from 'pages';
 import { createAppTheme } from 'theme/theme';
 
 const App = () => {
@@ -25,7 +27,11 @@ const App = () => {
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Routes></Routes>
+          <HeaderComponent />
+          <Routes>
+            <Route path="/" element={<Cards />} />
+            <Route path="/FullInfo" element={<FullInfo />} />
+          </Routes>
         </Router>
       </ThemeProvider>
     </StylesProvider>
