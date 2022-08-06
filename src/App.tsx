@@ -25,8 +25,7 @@ const App = () => {
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Routes>
-          </Routes>
+          <Routes></Routes>
         </Router>
       </ThemeProvider>
     </StylesProvider>
