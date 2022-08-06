@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  StylesProvider,
+  jssPreset,
+  createGenerateClassName,
+} from '@mui/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { create } from 'jss';
+import jssIncreaseSpecificity from 'jss-increase-specificity';
 
-function App() {
+import { createAppTheme } from 'theme/theme';
+
+const App = () => {
+  const theme = createAppTheme();
+  const jss = create({
+    plugins: [...jssPreset().plugins, jssIncreaseSpecificity()],
+  });
+  const generateClassName = createGenerateClassName({
+    productionPrefix: 'fetss-',
+    disableGlobal: false,
+    seed: 'ss',
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StylesProvider jss={jss} generateClassName={generateClassName}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Routes>
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </StylesProvider>
   );
-}
+};
 
 export default App;
