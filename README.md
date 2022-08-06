@@ -15,7 +15,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `npm run eject`
-Run server: [http://localhost:8080]
+Run server: [http://localhost:8080](http://localhost:3000)
 
 ### `npm test`
 
