@@ -37,6 +37,7 @@ export interface CityGoogle {
   timeUpdate: string;
   address_components: AddressComponentsType[];
   weather: weatherType;
+  diagram: DiagramDailyType[];
 }
 
 export interface ICardPropsType {
@@ -62,4 +63,33 @@ export type StateUseSelectType = {
 
 export type PlaceIdCityType = {
   place_id: string;
+};
+
+export type DiagramDailyStateType = {
+  dt: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
+  wind_speed: number;
+  wind_deg: number;
+  wind_gust: number;
+  weather: [
+    {
+      id: number;
+      main: string;
+      description: string;
+      icon: string;
+    }
+  ];
+  pop: number;
+};
+
+export type DiagramDailyType = {
+  day: string;
+  temp: number;
 };

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonRefresh: {
     color: theme.palette.common.black,
-    
+
     '&:hover': {
       color: theme.palette.custom?.main.blueberry,
       transition: 'color 0.2s linear',
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
 }));
 

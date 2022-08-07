@@ -12,7 +12,9 @@ type TCustomColors = {
   background: {};
   accent: {};
   colors: {};
-  other: {};
+  other: {
+    tuftsBlue: string;
+  };
 };
 declare module '@mui/material/styles' {
   interface PaletteOptions {
@@ -28,9 +30,10 @@ declare module '@mui/styles/defaultTheme' {
 
 export enum AppColor {
   BackgroundBlueberry = '#5B8CFF',
-  BackgroundRajah = '#ff5b5b',
+  BackgroundRajah = '#FFA25B',
   BackgroundFloralWhite = '#fffaf1',
   FontError = '#ff0000',
+  ButtonTuftsBlue = '#459DE9',
 }
 
 export const createAppTheme = () => {
@@ -48,7 +51,9 @@ export const createAppTheme = () => {
         background: {},
         colors: {},
         accent: {},
-        other: {},
+        other: {
+          tuftsBlue: AppColor.ButtonTuftsBlue,
+        },
       },
     },
   });

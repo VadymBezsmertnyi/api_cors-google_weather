@@ -1,5 +1,10 @@
 import { CityGoogle } from 'interface';
 
+export const colorMain = {
+  backgroundBlueberry: '#5B8CFF',
+  backgroundRajah: '#FFA25B',
+};
+
 export const DEFAULT_VALUES_ADDRESS = {
   long_name: '',
   short_name: '',
@@ -29,4 +34,5 @@ export const DEFAULT_VALUES_CITY: CityGoogle = {
     InHeaven: '',
     cold: false,
   },
+  diagram: [],
 };

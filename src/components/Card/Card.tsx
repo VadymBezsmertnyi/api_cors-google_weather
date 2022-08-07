@@ -6,7 +6,11 @@ import {
   RotateRight as RotateRightIcon,
 } from '@mui/icons-material';
 
-import { selectCity, fetchInfoCityWeather } from 'reducers/fetchWeather';
+import {
+  selectCity,
+  fetchInfoCityWeather,
+  fetchDiagramCityWeather,
+} from 'reducers/fetchWeather';
 import { deleteCity } from 'reducers/fetchGoogle';
 import { ICardPropsType, StateUseSelectType } from 'interface';
 
@@ -31,14 +35,15 @@ const Card = ({ city }: ICardPropsType) => {
 
   const clickUpdateCity = () => {
     dispatch(fetchInfoCityWeather(city));
+    dispatch(fetchDiagramCityWeather(showCity));
   };
 
   useEffect(() => {
     dispatch(fetchInfoCityWeather(city));
+    dispatch(fetchDiagramCityWeather(showCity));
   }, []);
 
   const enterCard = () => {
-    console.log({ select: showCity });
     dispatch(selectCity(showCity));
     navigate('/fullInfo');
   };

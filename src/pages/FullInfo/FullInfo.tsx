@@ -6,15 +6,18 @@ import { Box, Button, Typography } from '@mui/material';
 import { ArrowBackIosNew as ArrowBackIosNewIcon } from '@mui/icons-material';
 
 import { CardInfoWeather, FullInfoDiagram } from 'components';
-import { DEFAULT_VALUES_CITY } from 'constants/cities';
-import { fetchInfoCityWeather } from 'reducers/fetchWeather';
+import { colorMain, DEFAULT_VALUES_CITY } from 'constants/cities';
+import {
+  fetchDiagramCityWeather,
+  fetchInfoCityWeather,
+} from 'reducers/fetchWeather';
 import { StateUseSelectType } from 'interface';
 
 import useStyles from './FullInfo.styles';
 
 const FullInfo = () => {
   const [showCity, setShowCity] = useState(DEFAULT_VALUES_CITY);
-  const { nameCity, countryName, weather } = showCity;
+  const { nameCity, countryName, weather, diagram, place_id } = showCity;
   const dispatch: Function = useDispatch();
   const navigate = useNavigate();
   const cityState = useSelector(
@@ -24,7 +27,11 @@ const FullInfo = () => {
     (state: StateUseSelectType) => state.fetchWeather.loading
   );
   const cityLocal = JSON.parse(localStorage.getItem('select') || '{}');
-  const colorTemp = Number(weather.temp) >= 0 ? 'hot' : 'cold';
+  const colorTitleTemp = Number(weather.temp) >= 0 ? 'hot' : 'cold';
+  const colorDiagramTemp =
+    Number(weather.temp) >= 0
+      ? colorMain.backgroundRajah
+      : colorMain.backgroundBlueberry;
 
   const classes = useStyles();
 
@@ -40,6 +47,7 @@ const FullInfo = () => {
 
   const clickUpdateCity = () => {
     dispatch(fetchInfoCityWeather(showCity));
+    dispatch(fetchDiagramCityWeather(showCity));
   };
 
   return (
@@ -54,13 +62,17 @@ const FullInfo = () => {
         </Button>
         <Typography
           component={'h2'}
-          className={clsx(classes.headerTitle, classes[colorTemp])}
+          className={clsx(classes.headerTitle, classes[colorTitleTemp])}
         >{`${nameCity.long_name}, ${countryName.long_name}`}</Typography>
       </Box>
       <Box className={classes.fullInfoCity}>
         <CardInfoWeather weather={weather} />
       </Box>
-      <FullInfoDiagram />
+      <FullInfoDiagram
+        diagram={diagram}
+        place_id={place_id}
+        colorDiagram={colorDiagramTemp}
+      />
     </Box>
   );
 };

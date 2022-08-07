@@ -1,4 +1,9 @@
-import { CityGoogle, OptionsDateTimeType } from 'interface';
+import {
+  CityGoogle,
+  DiagramDailyStateType,
+  DiagramDailyType,
+  OptionsDateTimeType,
+} from 'interface';
 import { DEFAULT_VALUES_ADDRESS } from 'constants/cities';
 
 const URL_WEATHER_ICONS = `https://openweathermap.org/img/wn`;
@@ -101,5 +106,38 @@ export const addedWeatherInfo = (
       InHeaven: weather[0].description,
       cold: tempRound <= 0,
     },
+  };
+};
+
+export const addedDiagramInfo = (
+  city: CityGoogle,
+  diagramDaily: DiagramDailyStateType[]
+) => {
+  const diagramTempDays: DiagramDailyType[] = diagramDaily.map(
+    ({ dt, temp }) => {
+      const timeCity: string = new Date(dt * 1000).toLocaleDateString('en', {
+        hour: 'numeric',
+        minute: 'numeric',
+      });
+      const dayDiagramCity = timeCity.slice(
+        timeCity.length - 8,
+        timeCity.length - 3
+      );
+
+      return {
+        day: dayDiagramCity,
+        temp: Math.round(temp),
+      };
+    }
+  );
+
+  return {
+    ...city,
+    diagram: [
+      { day: '', temp: 0 },
+      { day: 'Now', temp: diagramTempDays[0].temp },
+      ...diagramTempDays.slice(1, 12),
+      { day: '', temp: 0 },
+    ],
   };
 };
