@@ -2,10 +2,13 @@ import { createTheme, Theme } from '@mui/material/styles';
 
 type TCustomColors = {
   main: {
-    brightGray: string;
-    darkGunmetal: string;
+    blueberry: string;
+    rajah: string;
+    floralWhite: string;
   };
-  font: {};
+  font: {
+    error: string;
+  };
   background: {};
   accent: {};
   colors: {};
@@ -24,8 +27,10 @@ declare module '@mui/styles/defaultTheme' {
 }
 
 export enum AppColor {
-  FontBrightGray = '#EFEFEF',
-  BackgroundDarkGunmetal = '#23242C',
+  BackgroundBlueberry = '#5B8CFF',
+  BackgroundRajah = '#ff5b5b',
+  BackgroundFloralWhite = '#fffaf1',
+  FontError = '#ff0000',
 }
 
 export const createAppTheme = () => {
@@ -33,10 +38,13 @@ export const createAppTheme = () => {
     palette: {
       custom: {
         main: {
-          brightGray: AppColor.FontBrightGray,
-          darkGunmetal: AppColor.BackgroundDarkGunmetal,
+          blueberry: AppColor.BackgroundBlueberry,
+          rajah: AppColor.BackgroundRajah,
+          floralWhite: AppColor.BackgroundFloralWhite,
         },
-        font: {},
+        font: {
+          error: AppColor.FontError,
+        },
         background: {},
         colors: {},
         accent: {},

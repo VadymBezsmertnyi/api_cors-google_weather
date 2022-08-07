@@ -30,13 +30,18 @@ const dateTimeZoneCity = (newCity: CityGoogle) => {
   const timeGreenwich =
     new Date().valueOf() + userOffSetMillisecond + cityOffSetMillisecond;
   const dataStandard = new Date(timeGreenwich);
-  const timeZone = dataStandard.toLocaleDateString('uk', OPTIONS_DATE_TIME);
+  const timeZone = dataStandard.toLocaleDateString('en', OPTIONS_DATE_TIME);
+  const timeUpdate = new Date().toLocaleDateString('en', {
+    hour: 'numeric',
+    minute: 'numeric',
+  });
 
   return {
     ...newCity,
     ...addInfoCity(newCity),
     timeMillisecond: dataStandard.valueOf(),
     timeZone,
+    timeUpdate,
   };
 };
 
@@ -85,6 +90,7 @@ export const addedWeatherInfo = (
 
   return {
     ...city,
+    ...dateTimeZoneCity(city),
     weather: {
       temp: showTextTemperature,
       wind: Math.round(wind.speed),

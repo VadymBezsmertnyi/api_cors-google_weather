@@ -12,6 +12,17 @@ type AddressComponentsType = {
   types: string[];
 };
 
+export type weatherType = {
+  temp: number | string;
+  wind: number;
+  humidity: number;
+  pressure: number;
+  feels: number | string;
+  icon: string;
+  InHeaven: string;
+  cold: Boolean;
+};
+
 export interface CityGoogle {
   place_id: string;
   countryName: AddressComponentsType;
@@ -23,27 +34,30 @@ export interface CityGoogle {
   utc_offset: number;
   timeMillisecond: number | Date;
   timeZone: string;
+  timeUpdate: string;
   address_components: AddressComponentsType[];
-  weather: {
-    temp: number | string;
-    wind: number;
-    humidity: number;
-    pressure: number;
-    feels: number | string;
-    icon: string;
-    InHeaven: string;
-    cold: Boolean;
-  };
+  weather: weatherType;
+}
+
+export interface ICardPropsType {
+  city: CityGoogle;
 }
 
 export type StateReducerType = {
   cities: CityGoogle[];
+  loading: Boolean;
+  error: Boolean;
 };
+
+export interface IInitialStateWeatherProps extends StateReducerType {
+  select: CityGoogle;
+}
 
 export type StateUseSelectType = {
   fetchGoogle: {
     cities: CityGoogle[];
   };
+  fetchWeather: IInitialStateWeatherProps;
 };
 
 export type PlaceIdCityType = {

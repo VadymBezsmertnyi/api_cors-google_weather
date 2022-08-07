@@ -1,19 +1,27 @@
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
-  contInputCity: {
+  containerEnterCity: {
     display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
     margin: '5rem 0 7.7rem 0 ',
     boxSizing: 'border-box',
   },
+  containerInput: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    padding: '0 10%',
+  },
   inputCity: {
-    width: '34.6rem',
+    width: '520px',
     height: '2.3rem',
     border: 0,
     borderRadius: '4px',
     boxShadow: '0px 2px 4px 1px rgb(34 60 80 / 20%)',
-    margin: '0rem 1rem 0rem 8.5rem',
     paddingLeft: '0.5rem',
     '&focus-visible': {
       border: 0,
@@ -30,6 +38,15 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
     background: '#459de9',
     textTransform: 'initial',
+    marginLeft: '10px',
+  },
+  messageError: {
+    color: theme.palette.custom?.font.error,
+    opacity: 0,
+  },
+  showError: {
+    opacity: 1,
+    transition: 'opacity 0.2s linear',
   },
 }));
 

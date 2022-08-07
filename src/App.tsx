@@ -27,9 +27,16 @@ const App = () => {
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <ThemeProvider theme={theme}>
         <Router>
-          <HeaderComponent />
           <Routes>
-            <Route path="/" element={<Cards />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <HeaderComponent />
+                  <Cards />
+                </>
+              }
+            />
             <Route path="/FullInfo" element={<FullInfo />} />
           </Routes>
         </Router>

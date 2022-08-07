@@ -1,11 +1,15 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
+import { DEFAULT_VALUES_CITY } from 'constants/cities';
 
-import { useHttp } from 'hooks';
-import { StateReducerType, CityGoogle } from 'interface';
+import { addedWeatherInfo, useHttp } from 'hooks';
+import { IInitialStateWeatherProps, CityGoogle } from 'interface';
 const KEY_WEATHER = process.env.REACT_APP_WEATHER_API_KEY;
 
-const initialState: StateReducerType = {
+const initialState: IInitialStateWeatherProps = {
   cities: [],
+  loading: false,
+  error: false,
+  select: DEFAULT_VALUES_CITY,
 };
 
 export const fetchInfoCityWeather = createAsyncThunk(
@@ -13,7 +17,6 @@ export const fetchInfoCityWeather = createAsyncThunk(
   ({ location, place_id }: CityGoogle) => {
     const { request } = useHttp();
     return request(
-      /* `${URL_WEATHER_API}?lat=${location.lat}&lon=${location.lng}&appid=${KEY_WEATHER}&units=metric` */
       `http://localhost:8080/weather/info?lat=${location.lat}&lon=${location.lng}&appid=${KEY_WEATHER}&place_id=${place_id}`,
       'GET'
     );
@@ -23,20 +26,48 @@ export const fetchInfoCityWeather = createAsyncThunk(
 const enterCity = createSlice({
   name: 'weather',
   initialState,
-  reducers: {},
+  reducers: {
+    selectCity: (state, action) => {
+      const { payload } = action;
+      localStorage.setItem('select', JSON.stringify(payload));
+      state.select = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchInfoCityWeather.fulfilled, (state, action) => {
         const { payload } = action;
+        if (payload.place_id) {
+          const listCities = JSON.parse(
+            localStorage.getItem('listCities') || '[]'
+          ) || [DEFAULT_VALUES_CITY];
+          const cityAddWeather: CityGoogle = listCities.find(
+            ({ place_id }: CityGoogle) => place_id === payload.place_id
+          );
+          const fullCityData = addedWeatherInfo(cityAddWeather, payload);
+          const newListCities = listCities.map((city: CityGoogle) =>
+            city.place_id === fullCityData.place_id ? fullCityData : city
+          );
 
-        console.log(state, payload);
+          if (
+            Boolean(current(state.select)) ||
+            state.select.place_id === fullCityData.place_id
+          ) {
+            localStorage.setItem('select', JSON.stringify(fullCityData));
+            state.select = fullCityData;
+          }
+
+          localStorage.setItem('listCities', JSON.stringify(newListCities));
+          state.cities = newListCities;
+          state.loading = false;
+          state.error = false;
+        } else {
+          state.error = true;
+        }
       })
-      .addCase(fetchInfoCityWeather.pending, (error) => {
-        console.log('fetchInfoCityWeather.pending/loading');
-      })
-      .addCase(fetchInfoCityWeather.rejected, (error) =>
-        console.log('fetchInfoCityWeather.rejected', error)
-      );
+      .addCase(fetchInfoCityWeather.pending, (state) => {
+        state.loading = true;
+      });
   },
 });
 
@@ -44,4 +75,4 @@ const { actions, reducer } = enterCity;
 
 export default reducer;
 
-//export const { addCity } = actions;
+export const { selectCity } = actions;

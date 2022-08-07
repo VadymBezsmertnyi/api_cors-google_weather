@@ -1,25 +1,28 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Typography } from '@mui/material';
 import {
   Close as CloseIcon,
   RotateRight as RotateRightIcon,
 } from '@mui/icons-material';
 
-import { fetchInfoCityWeather } from 'reducers/fetchWeather';
+import { selectCity, fetchInfoCityWeather } from 'reducers/fetchWeather';
 import { deleteCity } from 'reducers/fetchGoogle';
-import { CityGoogle } from 'interface';
+import { ICardPropsType, StateUseSelectType } from 'interface';
 
 import useStyles from './Card.styles';
-
-interface ICardPropsType {
-  city: CityGoogle;
-}
+import { CardWeather } from 'components';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ city }: ICardPropsType) => {
-  console.log(city);
-  const { nameCity, countryName, timeZone } = city;
+  const cities = useSelector(
+    (state: StateUseSelectType) => state.fetchWeather.cities
+  );
+  const showCity =
+    cities.find(({ place_id }) => place_id === city.place_id) || city;
+  const { nameCity, countryName, timeZone, timeUpdate, weather } = showCity;
   const dispatch: Function = useDispatch();
+  const navigate = useNavigate();
   const classes = useStyles();
 
   const clickDeleteCity = () => {
@@ -32,36 +35,48 @@ const Card = ({ city }: ICardPropsType) => {
 
   useEffect(() => {
     dispatch(fetchInfoCityWeather(city));
-  }, [city]);
+  }, []);
+
+  const enterCard = () => {
+    console.log({ select: showCity });
+    dispatch(selectCity(showCity));
+    navigate('/fullInfo');
+  };
 
   return (
     <Box className={classes.card}>
       <Box className={classes.cardContainerSetting}>
-        <Button onClick={clickDeleteCity}>
-          <CloseIcon />
+        <Button onClick={clickUpdateCity} className={classes.buttonsCard}>
+          <RotateRightIcon className={classes.iconButtonsCard} />
         </Button>
-        <Button onClick={clickUpdateCity}>
-          <RotateRightIcon />
+        <Button onClick={clickDeleteCity} className={classes.buttonsCard}>
+          <CloseIcon className={classes.iconButtonsCard} />
         </Button>
       </Box>
-      <Box className={classes.cardMainInfo}>
-        <Box className={classes.cardCityInfo}>
-          <Typography className={classes.cardCityCountry}>
-            {`${nameCity.long_name}, ${countryName.short_name}`}
-          </Typography>
-          <Typography
-            className={classes.cardCityData}
-          >{`Дата а містом: ${timeZone}`}</Typography>
+      <Box className={classes.cardClick} onClick={enterCard}>
+        <Box className={classes.cardMainInfo}>
+          <Box className={classes.cardCityInfo}>
+            <Typography className={classes.cardCityCountry}>
+              {`${nameCity.long_name}, ${countryName.short_name}`}
+            </Typography>
+            <Typography className={classes.cardCityData}>{timeZone}</Typography>
+          </Box>
+          <Box className={classes.cardTempInfo}>
+            <Box
+              component="img"
+              className={classes.cardIconSun}
+              src={weather.icon}
+              alt={'InHeaven'}
+            />
+            <Typography className={classes.cardTempType}>
+              {weather.InHeaven}
+            </Typography>
+          </Box>
         </Box>
-        <Box className={classes.cardTempInfo}>
-          <Box
-            component="img"
-            className={classes.cardIconSun}
-            src={'icon'}
-            alt={'InHeaven'}
-          />
-          <Typography className={classes.cardTempType}>InHeaven</Typography>
-        </Box>
+        <CardWeather city={showCity} />
+        <Typography
+          className={classes.timeUpdate}
+        >{`Оновлено: ${timeUpdate}`}</Typography>
       </Box>
     </Box>
   );

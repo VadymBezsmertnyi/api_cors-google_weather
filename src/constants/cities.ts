@@ -17,6 +17,7 @@ export const DEFAULT_VALUES_CITY: CityGoogle = {
   utc_offset: 0,
   timeMillisecond: 0,
   timeZone: '',
+  timeUpdate: '',
   address_components: [DEFAULT_VALUES_ADDRESS],
   weather: {
     temp: '',
