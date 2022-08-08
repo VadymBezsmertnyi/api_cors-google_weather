@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { TEST_DEFAULT_VALUES_CITY } from '../../constants/cities';
+import { TEST_DEFAULT_VALUES_CITY } from 'constants/cities'; 
 import Card from './Card';
 
 it('renders "Welcome to Your Fluent UI App"', () => {

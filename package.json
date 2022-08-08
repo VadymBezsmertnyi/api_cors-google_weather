@@ -22,6 +22,7 @@
     "enzyme": "^3.11.0",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
+    "jest-environment-node": "^28.1.3",
     "jss": "^10.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -41,7 +42,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test -- --config=jest.config.ts",
+    "test": "react-scripts test -- --config=jest.config.js",
     "eject": "react-scripts eject",
     "server": "node server.js"
   },
