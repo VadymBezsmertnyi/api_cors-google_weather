@@ -1,27 +1,16 @@
 {
   "compilerOptions": {
-    "types": ["node"],
     "baseUrl": "./src/",
-    "paths": {
-      "components/*": ["./src/components/*"]
-    },
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "sourceMap": true,
     "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    //"moduleResolution": "node",
     "jsx": "react-jsx"
   },
-  "include": ["./src/**/*", "src", "src/**/*.tsx", "src/**/*.ts", "dist"],
-  "exclude": ["node_modules", ".vscode", "jest.config.ts"]
+  "include": [
+    "./src/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+  ]
 }

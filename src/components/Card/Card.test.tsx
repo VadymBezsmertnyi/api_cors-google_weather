@@ -1,9 +1,16 @@
-import { render, screen } from '@testing-library/react';
-import { TEST_DEFAULT_VALUES_CITY } from 'constants/cities'; 
+import { TEST_DEFAULT_VALUES_CITY } from 'constants/cities';
+import { ICardPropsType } from 'interface';
+import { act, render, screen, fireEvent } from 'testUtils';
+
 import Card from './Card';
 
-it('renders "Welcome to Your Fluent UI App"', () => {
-  render(<Card city={TEST_DEFAULT_VALUES_CITY}/>);
-  const linkElement = screen.getByText(/Welcome to Your Fluent UI App/i);
-  expect(linkElement).toBeInTheDocument();
+describe('Atom: Tab', () => {
+  it('should render', () => {
+    render(<Card city={TEST_DEFAULT_VALUES_CITY} />);
+
+    expect(
+      screen.getByTestId(`test_${TEST_DEFAULT_VALUES_CITY.nameCity.long_name}`)
+    ).toBeInTheDocument();
+    expect(screen.getByText('Tab')).toBeInTheDocument();
+  });
 });
