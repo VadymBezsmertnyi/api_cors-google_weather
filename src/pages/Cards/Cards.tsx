@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import { Card } from 'components';
 import { CityGoogle, StateUseSelectType } from 'interface';
@@ -23,6 +23,7 @@ const Cards = () => {
 
   return (
     <Box className={classes.cardsContainer}>
+      {!cities.length && <Typography>Not select cities</Typography>}
       {cities.map((city: CityGoogle) => (
         <Card key={`Card_${city.place_id}`} city={city} />
       ))}

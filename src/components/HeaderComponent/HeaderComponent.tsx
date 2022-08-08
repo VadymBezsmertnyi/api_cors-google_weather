@@ -7,7 +7,7 @@ const HeaderComponent = () => {
     const classes = useStyles();
 
     return (
-        <Box component='header'>
+        <Box id="header" component='header'>
             <EnterCity />
         </Box>
     );
