@@ -11,7 +11,6 @@ const CardInfoWeather = ({ weather }: ICardInfoWeatherProps) => {
   return (
     <>
       <CustomOtherInfo
-        key={'Temp'}
         nameTypeInfo={`Temperature:`}
         valueTypeInfo={weather.temp}
         space={true}
@@ -19,7 +18,6 @@ const CardInfoWeather = ({ weather }: ICardInfoWeatherProps) => {
         stateStyle={classes.cardRightTextInfo}
       />
       <CustomOtherInfo
-        key={'InHeaven'}
         nameTypeInfo={`In heaven:`}
         valueTypeInfo={weather.InHeaven}
         space={true}
@@ -28,7 +26,6 @@ const CardInfoWeather = ({ weather }: ICardInfoWeatherProps) => {
         stateStyle={classes.cardRightTextInfo}
       />
       <CustomOtherInfo
-        key={'Wind'}
         nameTypeInfo={`Wind:`}
         valueTypeInfo={weather.wind}
         space={true}
@@ -36,14 +33,12 @@ const CardInfoWeather = ({ weather }: ICardInfoWeatherProps) => {
         stateStyle={classes.cardRightTextInfo}
       />
       <CustomOtherInfo
-        key={'Humidity'}
         nameTypeInfo={`Humidity:`}
         valueTypeInfo={weather.humidity}
         symbolNameTypeInfo={'%'}
         stateStyle={classes.cardRightTextInfo}
       />
       <CustomOtherInfo
-        key={'Pressure'}
         nameTypeInfo={`Pressure:`}
         valueTypeInfo={weather.pressure}
         symbolNameTypeInfo={'Pa'}
