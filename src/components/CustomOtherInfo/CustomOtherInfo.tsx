@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import useStyles from './CustomOtherInfo.styles';
 
@@ -26,9 +26,9 @@ const CustomOtherInfo = ({
   const addSpace = space && ` `;
 
   return (
-    <Typography component={'span'} className={classNames(stateStyle)}>
+    <Typography component={'span'} className={clsx(stateStyle)}>
       {nameTypeInfo} &nbsp;
-      <Typography className={classNames(stateStyle, styleMarker)}>
+      <Typography className={clsx(stateStyle, styleMarker)}>
         {valueTypeInfo}
         {addSpace}
         {symbolNameTypeInfo === 'icon' ? (
