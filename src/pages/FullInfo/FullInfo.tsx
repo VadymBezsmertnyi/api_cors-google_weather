@@ -27,9 +27,9 @@ const FullInfo = () => {
     (state: StateUseSelectType) => state.fetchWeather.loading
   );
   const cityLocal = JSON.parse(localStorage.getItem('select') || '{}');
-  const colorTitleTemp = Number(weather.temp) >= 0 ? 'hot' : 'cold';
+  const colorTitleTemp = Number(weather?.temp) >= 0 ? 'hot' : 'cold';
   const colorDiagramTemp =
-    Number(weather.temp) >= 0
+    Number(weather?.temp) >= 0
       ? colorMain.backgroundRajah
       : colorMain.backgroundBlueberry;
 
@@ -51,7 +51,7 @@ const FullInfo = () => {
   };
 
   return (
-    <Box className={classes.containerFullInfo}>
+    <Box data-testid={`test_fullInfo_component`} className={classes.containerFullInfo}>
       <Box className={classes.headerContainer}>
         <Link className={classes.linkBack} to={`/`}>
           <ArrowBackIosNewIcon />
@@ -63,7 +63,7 @@ const FullInfo = () => {
         <Typography
           component={'h2'}
           className={clsx(classes.headerTitle, classes[colorTitleTemp])}
-        >{`${nameCity.long_name}, ${countryName.long_name}`}</Typography>
+        >{`${nameCity?.long_name}, ${countryName?.long_name}`}</Typography>
       </Box>
       <Box className={classes.fullInfoCity}>
         <CardInfoWeather weather={weather} />

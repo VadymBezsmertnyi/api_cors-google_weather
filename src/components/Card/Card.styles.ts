@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     minWidth: 0,
     color: theme.palette.common.black,
-    zIndex: '1001',
 
     '&:hover': {
       color: theme.palette.custom?.main.blueberry,

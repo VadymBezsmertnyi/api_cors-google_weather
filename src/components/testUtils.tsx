@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactElement, ReactNode } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
@@ -20,10 +21,15 @@ const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>
 ) =>
-  render(<Provider store={store}>{ui}</Provider>, {
-    wrapper: MuiThemeProvider,
-    ...options,
-  });
+  render(
+    <Provider store={store}>
+      <BrowserRouter>{ui}</BrowserRouter>
+    </Provider>,
+    {
+      wrapper: MuiThemeProvider,
+      ...options,
+    }
+  );
 
 export * from '@testing-library/react';
 export { customRender as render };
