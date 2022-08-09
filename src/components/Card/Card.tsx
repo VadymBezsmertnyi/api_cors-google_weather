@@ -49,7 +49,7 @@ const Card = ({ city }: ICardPropsType) => {
   };
 
   return (
-    <Box className={classes.card}>
+    <Box data-testid={`test_card_${nameCity.long_name}`} className={classes.card}>
       <Box className={classes.cardContainerSetting}>
         <Button onClick={clickUpdateCity} className={classes.buttonsCard}>
           <RotateRightIcon className={classes.iconButtonsCard} />

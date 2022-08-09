@@ -22,7 +22,7 @@ const Cards = () => {
   }
 
   return (
-    <Box className={classes.cardsContainer}>
+    <Box data-testid={`test_card_component`} className={classes.cardsContainer}>
       {!cities.length && <Typography>Not select cities</Typography>}
       {cities.map((city: CityGoogle) => (
         <Card key={`Card_${city.place_id}`} city={city} />

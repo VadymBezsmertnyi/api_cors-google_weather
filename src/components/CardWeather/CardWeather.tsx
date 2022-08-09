@@ -8,7 +8,7 @@ const CardWeather = ({ city }: ICardPropsType) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.cardFullInfo}>
+    <Box data-testid={`test_weather_${city.nameCity.long_name}`}  className={classes.cardFullInfo}>
       <Box className={classes.cardLeftInfo}>
         <Box className={classes.cardTemp}>
           <Typography className={classes.cardLeftTemp}>{temp}</Typography>

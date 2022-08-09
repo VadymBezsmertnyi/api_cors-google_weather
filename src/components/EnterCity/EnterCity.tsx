@@ -46,16 +46,21 @@ const EnterCity = () => {
   };
 
   return (
-    <Box className={classes.containerEnterCity}>
+    <Box data-testid={`enter_city`} className={classes.containerEnterCity}>
       <Box className={classes.containerInput}>
         <Autocomplete
+          data-testid={`input_enter_city`}
           apiKey={KEY_GOOGLE}
           ref={inputAutocomplete}
           onPlaceSelected={changeNameCity}
           className={classes.inputCity}
           language="ukr"
         />
-        <Button onClick={sendInfoCity} className={classes.buttonInputCity}>
+        <Button
+          data-testid={`button_enter_city`}
+          onClick={sendInfoCity}
+          className={classes.buttonInputCity}
+        >
           Add
         </Button>
       </Box>

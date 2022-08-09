@@ -91,7 +91,7 @@ export const TEST_DEFAULT_VALUES_CITY: CityGoogle = {
   },
   diagram: [
     {
-      day: '',
+      day: '12',
       temp: 0,
     },
     {
